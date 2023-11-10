@@ -1,0 +1,158 @@
+CREATE SCHEMA tms;
+USE tms;
+
+CREATE TABLE gender (gender_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, gender_name VARCHAR(45) NOT NULL UNIQUE);
+INSERT INTO gender(gender_name) VALUES('male'),('female'),('other'),('denied to reveal');
+
+CREATE TABLE result (result_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, result_name VARCHAR(45) NOT NULL UNIQUE);
+INSERT INTO result(result_name) VALUES('pending'),('accepted'),('rejected');
+
+CREATE TABLE task_status (task_status_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, task_status_name VARCHAR(45) NOT NULL UNIQUE);
+INSERT INTO task_status(task_status_name) VALUES('pending'),('in_process'),('done');
+
+CREATE TABLE ind_status (ind_status_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, ind_status_name VARCHAR(45) NOT NULL UNIQUE);
+INSERT INTO ind_status(ind_status_name) VALUES('offline'),('online'),('in_meeting');
+
+CREATE TABLE emp_status (emp_status_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, emp_status_name VARCHAR(45) NOT NULL UNIQUE);
+INSERT INTO emp_status(emp_status_name) VALUES('active'),('inactive');
+
+CREATE TABLE leaders
+(leader_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+leader_name VARCHAR(45) NOT NULL UNIQUE, 
+leader_email VARCHAR(45) NOT NULL UNIQUE, 
+emp_status_id INT NOT NULL, 
+FOREIGN KEY(emp_status_id) REFERENCES emp_status(emp_status_id), 
+ind_status_id INT NOT NULL, 
+FOREIGN KEY(ind_status_id) REFERENCES ind_status(ind_status_id));
+INSERT INTO leaders(leader_name,leader_email,emp_status_id,ind_status_id) VALUES('Valish Dsouza','valish.dsouza@silverspaceinc.com',1,2);
+
+CREATE TABLE taskees
+(taskee_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+taskee_name VARCHAR(45) NOT NULL UNIQUE, 
+taskee_email VARCHAR(45) NOT NULL UNIQUE, 
+emp_status_id INT NOT NULL, 
+FOREIGN KEY(emp_status_id) REFERENCES emp_status(emp_status_id), 
+ind_status_id INT NOT NULL, 
+FOREIGN KEY(ind_status_id) REFERENCES ind_status(ind_status_id),
+leader_id INT NOT NULL,
+FOREIGN KEY(leader_id) REFERENCES leaders(leader_id));
+INSERT INTO taskees(taskee_name,taskee_email,emp_status_id,ind_status_id,leader_id) VALUES('Umang Pandya','umang.pandya@silverspaceinc.com',1,2,1);
+
+CREATE TABLE task_types (task_type_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+task_type_name VARCHAR(45) NOT NULL UNIQUE,
+name INT NOT NULL,
+company INT NOT NULL,
+interview_round INT NOT NULL,
+job_title INT NOT NULL,
+technology INT NOT NULL,
+email INT NOT NULL,
+phone INT NOT NULL,
+deadline INT NOT NULL,
+date_time_zone INT NOT NULL,
+duration INT NOT NULL);
+INSERT INTO task_types(task_type_name,name,company,interview_round,job_title,technology,email,phone,deadline,date_time_zone,duration) VALUES
+('Resume Understanding', 1, 0, 0, 0, 1, 1, 1, 0, 1, 0),
+('Resume Making/Reviewing', 1, 0, 0, 0, 1, 1, 1, 0, 1, 0),
+('Technical Support', 1, 1, 1, 1, 0, 1, 1, 0, 1, 0),
+('Assessment', 1, 0, 0, 0, 1, 1, 1, 1, 1, 1),
+('Job Support', 1, 0, 0, 0, 1, 1, 1, 1, 1, 1),
+('Training', 1, 0, 0, 0, 1, 1, 1, 0, 1, 1),
+('Mock Interviews', 1, 0, 0, 0, 1 ,1 ,1, 0, 1, 0);
+
+CREATE TABLE states(state_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, state_name VARCHAR(45) NOT NULL UNIQUE,
+acronym VARCHAR(2) NOT NULL UNIQUE);
+INSERT INTO states(state_name, acronym) values('Alabama','AL');
+INSERT INTO states(state_name, acronym) values('Alaska','AK');
+INSERT INTO states(state_name, acronym) values('Arizona','AZ');
+INSERT INTO states(state_name, acronym) values('Arkansas','AR');
+INSERT INTO states(state_name, acronym) values('California','CA');
+INSERT INTO states(state_name, acronym) values('Colorado','CO');
+INSERT INTO states(state_name, acronym) values('Connecticut','CT');
+INSERT INTO states(state_name, acronym) values('Delaware','DE');
+INSERT INTO states(state_name, acronym) values('Florida','FL');
+INSERT INTO states(state_name, acronym) values('Georgia','GA');
+INSERT INTO states(state_name, acronym) values('Hawaii','HI');
+INSERT INTO states(state_name, acronym) values('Idaho','ID');
+INSERT INTO states(state_name, acronym) values('Illinois','IL');
+INSERT INTO states(state_name, acronym) values('Indiana','IN');
+INSERT INTO states(state_name, acronym) values('Iowa','IA');
+INSERT INTO states(state_name, acronym) values('Kansas','KS');
+INSERT INTO states(state_name, acronym) values('Kentucky','KY');
+INSERT INTO states(state_name, acronym) values('Louisiana','LA');
+INSERT INTO states(state_name, acronym) values('Maine','ME');
+INSERT INTO states(state_name, acronym) values('Maryland','MD');
+INSERT INTO states(state_name, acronym) values('Massachusetts','MA');
+INSERT INTO states(state_name, acronym) values('Michigan','MI');
+INSERT INTO states(state_name, acronym) values('Minnesota','MN');
+INSERT INTO states(state_name, acronym) values('Mississippi','MS');
+INSERT INTO states(state_name, acronym) values('Missouri','MO');
+INSERT INTO states(state_name, acronym) values('Montana','MT');
+INSERT INTO states(state_name, acronym) values('Nebraska','NE');
+INSERT INTO states(state_name, acronym) values('Nevada','NV');
+INSERT INTO states(state_name, acronym) values('New Hampshire','NH');
+INSERT INTO states(state_name, acronym) values('New Jersey','NJ');
+INSERT INTO states(state_name, acronym) values('New Mexico','NM');
+INSERT INTO states(state_name, acronym) values('New York','NY');
+INSERT INTO states(state_name, acronym) values('North Carolina','NC');
+INSERT INTO states(state_name, acronym) values('North Dakota','ND');
+INSERT INTO states(state_name, acronym) values('Ohio','OH');
+INSERT INTO states(state_name, acronym) values('Oklahoma','OK');
+INSERT INTO states(state_name, acronym) values('Oregon','OR');
+INSERT INTO states(state_name, acronym) values('Pennsylvania','PA');
+INSERT INTO states(state_name, acronym) values('Rhode Island','RI');
+INSERT INTO states(state_name, acronym) values('South Carolina','SC');
+INSERT INTO states(state_name, acronym) values('South Dakota','SD');
+INSERT INTO states(state_name, acronym) values('Tennessee','TN');
+INSERT INTO states(state_name, acronym) values('Texas','TX');
+INSERT INTO states(state_name, acronym) values('Utah','UT');
+INSERT INTO states(state_name, acronym) values('Vermont','VT');
+INSERT INTO states(state_name, acronym) values('Virginia','VA');
+INSERT INTO states(state_name, acronym) values('Washington','WA');
+INSERT INTO states(state_name, acronym) values('West Virginia','WV');
+INSERT INTO states(state_name, acronym) values('Wisconsin','WI');
+INSERT INTO states(state_name, acronym) values('Wyoming','WY');
+
+CREATE TABLE companies(company_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+company_url VARCHAR(300) NOT NULL,
+company_name VARCHAR(45) NOT NULL);
+
+CREATE TABLE candidates(
+candidate_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+candidate_name VARCHAR(45) NOT NULL,
+candidate_phone VARCHAR(45) NOT NULL,
+candidate_email VARCHAR(45) NOT NULL,
+gender_id INT NOT NULL, FOREIGN KEY(gender_id) REFERENCES gender(gender_id),
+age INT NOT NULL,
+education VARCHAR(45),
+university VARCHAR(45),
+technology VARCHAR(45),
+total_experience_year INT,
+state_id INT NOT NULL, FOREIGN KEY(state_id) REFERENCES states(state_id)),
+resume_link VARCHAR(255);
+
+CREATE TABLE task_acknowledgement (
+acknowledge_id INT PRIMARY KEY,
+acknowledge_name VARCHAR(255));
+
+INSERT INTO task_acknowledgement (acknowledge_id, acknowledge_name)
+VALUES(0, 'not acknowledged'), (1, 'acknowledged');
+
+ALTER TABLE task_acknowledgement
+MODIFY acknowledge_id INT AUTO_INCREMENT PRIMARY KEY;
+
+CREATE TABLE main (
+main_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+candidate_id INT, FOREIGN KEY(candidate_id) REFERENCES candidates(candidate_id),
+company_id INT, FOREIGN KEY(company_id) REFERENCES companies(company_id),
+task_type_id INT, FOREIGN KEY(task_type_id) REFERENCES task_types(task_type_id),
+job_title VARCHAR(45),
+interview_round INT,
+date_time_timezone VARCHAR(45),
+duration_in_hours INT,
+deadline datetime,
+taskee_id INT, FOREIGN KEY(taskee_id) REFERENCES taskees(taskee_id),
+assigned_date_time datetime,
+acknowledge_id INT, FOREIGN KEY(acknowledge_id) REFERENCES task_acknowledgement(acknowledge_id),
+task_status_id INT, FOREIGN KEY(task_status_id) REFERENCES task_status(task_status_id),
+finished_date datetime,
+result_id INT, FOREIGN KEY(result_id) REFERENCES result(result_id));

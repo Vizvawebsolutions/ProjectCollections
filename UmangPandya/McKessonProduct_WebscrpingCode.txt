@@ -1,0 +1,45 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+
+#script
+
+url = "https://mms.mckesson.com/product/1101519/McKesson-Brand-16-6125A3"
+response = requests.get(url) # get response of the url
+html = response.text # get the text of the response
+soup = BeautifulSoup(html,'lxml') # create the soup object for the response text
+
+keys = soup.find_all('th',scope = 'row') # targeting the headers of the table after finding it in the website
+keys = [key.get_text(separator = ',') for key in keys] # getting the text of those html soup objects for each of them
+
+values = soup.find_all('td') ## targeting the values of those headers of the table after finding it in the website
+values = [value.get_text(separator = ',') for value in values] # getting the text of those html soup objects for each of them
+
+#converting the 2 lists to a dictionary object
+d = {}
+for key,value in zip(keys,values):
+    d.update({key:value})
+    
+#converting the dictionary to json for final output    
+d = json.dumps(d,indent = 4)
+
+
+
+#function
+
+def scrape_Mckesson_Products(url):
+    response = requests.get(url)
+    html = response.text
+    soup = BeautifulSoup(html,'lxml')
+
+    keys = soup.find_all('th',scope = 'row')
+    keys = [key.get_text(separator = ',') for key in keys]
+
+    values = soup.find_all('td')
+    values = [value.get_text(separator = ',') for value in values]
+
+    d = {}
+    for key,value in zip(keys,values):
+        d.update({key:value})
+    d = json.dumps(d,indent = 4)
+    return d

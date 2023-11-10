@@ -1,0 +1,32 @@
+Answers:
+
+1 a) Series
+2 c) pd.read_sql()
+3 c) df['column_name']
+4 a) Ascending
+5 b) df.isnull()
+6 b) df.columns = ['A', 'B', 'C']
+7 a) Aggregates data based on one or more columns
+8 b) apply()
+9 a) df.dropna()
+10 d) merge()
+11 c) Aggregating data using a summary function
+12 c) df.str.lower()
+13 b) Divides a continuous variable into discrete bins
+14 b) df.aggregate(['mean', 'median', 'std'])
+15 a) df.set_index('index_column')
+16 c) apply()
+17 c) Converts a string column to a datetime format
+18 a) df.filter()
+19 a) pd.concat([df1, df2], axis=0)
+20 a) Encodes categorical variables as binary dummy/indicator variables
+21 c) df.corr()
+22 a) df.add()
+23 c) df.apply(lambda x: round(x))
+24 b) Transforms wide data into long format
+25 a) df.shift()
+26 a) Sets the precision of floating-point numbers
+27 a) df.drop_duplicates(subset=None)
+28 b) Converts a DataFrame to a CSV file
+29 a) Converts a DataFrame to a pickle file
+30 a) df.reset_index()

@@ -1,0 +1,40 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+import re
+from datetime import datetime
+
+# Getting the Deal of the Week from kogland.com
+
+def get_kogland_dotw():
+    url = "https://www.kogland.com/"
+    response = requests.get(url)
+    html = response.text
+    soup = BeautifulSoup(html,'lxml')
+    dotw = []
+    for link in soup.find_all('a', class_ = 'product-item-link', attrs={'href': re.compile("^https://")}):
+        dotw.append(link.get('href'))
+    return dotw
+
+def kogland_dotw(url):
+    response = requests.get(url)
+    html = response.text
+    soup = BeautifulSoup(html,'html.parser')
+    name = soup.find_all('span',class_ = 'base')[0].text
+    price = soup.find_all('span',class_ = 'price')[0].text
+    brand = soup.find_all('span',class_ = 'product-detail-blue')[0].text
+    seller = soup.find_all('div',class_='col-lg-9')[1].find_all('span')[0].get_text()
+    d = {
+        'product_name':name,
+        'price':price,
+        'brand':brand,
+        'seller':seller
+    }
+    return d
+
+def kogland_dotw_all_info():
+    getdotw = get_kogland_dotw()
+    d = []
+    for link in getdotw:
+        d.append(kogland_dotw(link))
+    return d

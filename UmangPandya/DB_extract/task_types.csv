@@ -1,0 +1,8 @@
+task_type_id,task_type_name,name,company,interview_round,job_title,technology,email,phone,deadline,date_time_zone,duration
+1,Resume Understanding,1,0,0,0,1,1,1,0,1,0
+2,Resume Making/Reviewing,1,0,0,0,1,1,1,0,1,0
+3,Technical Support,1,1,1,1,0,1,1,0,1,0
+4,Assessment,1,0,0,0,1,1,1,1,1,1
+5,Job Support,1,0,0,0,1,1,1,1,1,1
+6,Training,1,0,0,0,1,1,1,0,1,1
+7,Mock Interviews,1,0,0,0,1,1,1,0,1,0

@@ -1,0 +1,7 @@
+Apache Airflow
+Linux
+Docker
+Kubernetes
+Postgres
+gitbash
+SSIS
